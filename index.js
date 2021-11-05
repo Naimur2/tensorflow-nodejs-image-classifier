@@ -1,35 +1,14 @@
 const express = require('express');
 const cors = require('cors');
-const fs = require('fs');
-const path = require('path');
-const tfn = require('@tensorflow/tfjs-node');
-const tf = require('@tensorflow/tfjs');
-
-const keras = require('./lib/keras');
 
 const app = express();
 
+const testRouter = require('./routers/testRouter');
+
 app.use(cors());
+app.use(express.json());
 
-const getResult = async (req, res, next) => {
-    try {
-        const Image = await keras.preprocessImage.VGG16('files/dog.jpg');
-        const result = await keras.predict(Image, 'vgg16/model.json');
-        console.log(result);
-        req.prediction = result;
-        next();
-    } catch (err) {
-        res.status(500).json({ error: 'There was aserver side error!' });
-    }
-};
-
-app.get('/', getResult, async (req, res) => {
-    try {
-        res.status(200).json({ result: req.prediction, message: 'success' });
-    } catch (err) {
-        res.status(500).json({ error: 'There was aserver side error!' });
-    }
-});
+app.use('/vgg', testRouter);
 
 const errorHandler = (err, req, res, next) => {
     if (req.headerSent) {
@@ -39,5 +18,5 @@ const errorHandler = (err, req, res, next) => {
 };
 
 app.listen(8080, () => {
-    console.log('App Started at port 8080');
+    console.log('App Started at port localhost:8080');
 });
