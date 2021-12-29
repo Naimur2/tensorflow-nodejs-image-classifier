@@ -13,7 +13,6 @@ const getResult = async (req, res, next) => {
                 classname: diseases.diseaseNames[item.classname],
             };
         });
-        console.log(result);
         req.prediction = result;
         next();
     } catch (err) {
