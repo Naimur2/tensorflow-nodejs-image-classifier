@@ -1,7 +1,6 @@
 const keras = require('../lib/keras');
 
 const getResult = async (req, res, next) => {
-    console.log(req);
     const { filename } = req.file;
 
     try {

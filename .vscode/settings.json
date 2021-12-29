@@ -12,5 +12,6 @@
         "source.organizeImports": true
     },
     "eslint.alwaysShowStatus": true,
-    "workbench.colorTheme": "Learn with Sumit - Peace of the eye - Dracula version"
+    "workbench.colorTheme": "Learn with Sumit - Peace of the eye - Dracula version",
+    "liveServer.settings.port": 5508
 }
