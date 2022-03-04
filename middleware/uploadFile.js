@@ -2,7 +2,7 @@
 const multer = require("multer");
 const path = require("path");
 
-const UPLOADS_FOLDER = path.join(__dirname,'../public/files/');
+const UPLOADS_FOLDER = path.join(__dirname, "../public/files/");
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -11,31 +11,26 @@ const storage = multer.diskStorage({
     filename: (req, file, cb) => {
         const fileExt = path.extname(file.originalname);
         const fileName = `${file.originalname
-            .replace(fileExt, '')
+            .replace(fileExt, "")
             .toLowerCase()
-            .split(' ')
-            .join('-')}-${Date.now()}`;
+            .split(" ")
+            .join("-")}-${Date.now()}`;
         cb(null, fileName + fileExt);
-    }
+    },
 });
 
 // prepare final multer upload object
 const upload = multer({
     storage,
     limits: {
-        fileSize: 10000000,
+        fileSize: 1000000000000000000,
     },
     fileFilter: (req, file, cb) => {
-            if (
-                file.mimetype === 'image/jpg' ||
-                file.mimetype === 'image/jpeg' ||
-                file.mimetype === 'image/png'
-            ) {
-                cb(null, true);
-            } else {
-                cb(new Error('Only .jpg .jpeg .png or gif file is allowed.'));
-            }
-        
+        if (file.mimetype === "image/jpg" || file.mimetype === "image/jpeg") {
+            cb(null, true);
+        } else {
+            cb(new Error("Only .jpg .jpeg .png or gif file is allowed."));
+        }
     },
 });
 

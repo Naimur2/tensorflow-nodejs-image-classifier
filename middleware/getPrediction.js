@@ -9,7 +9,7 @@ const getResult = async (req, res, next) => {
         req.prediction = result;
         next();
     } catch (err) {
-        res.status(500).json({ error: 'There was a server side error!' });
+        throw new Error("SomeThing Went wrong");
     }
 };
 
